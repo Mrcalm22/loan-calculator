@@ -70,7 +70,7 @@ select {
 .page-shell {
   position: relative;
   z-index: 1;
-  max-width: 1460px;
+  max-width: 1540px;
   margin: 0 auto;
   padding: 2.4rem 1.25rem 3rem;
 }
@@ -161,8 +161,8 @@ select {
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(32rem, 0.98fr) minmax(42rem, 1.12fr);
-  gap: 1.4rem;
+  grid-template-columns: minmax(36rem, 0.96fr) minmax(44rem, 1.04fr);
+  gap: 1.2rem;
   margin-top: 1.4rem;
   align-items: start;
 }
@@ -173,7 +173,7 @@ select {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
-  padding: 1.35rem;
+  padding: 1.2rem;
   animation: rise-in 620ms ease-out both;
   min-width: 0;
 }
@@ -193,7 +193,7 @@ select {
 }
 
 .panel-heading h2 {
-  font-size: 1.42rem;
+  font-size: 1.34rem;
   line-height: 1.35;
 }
 
@@ -283,7 +283,7 @@ select {
 
 .loan-card h3,
 .table-header h3 {
-  font-size: 1.22rem;
+  font-size: 1.14rem;
   line-height: 1.35;
 }
 
@@ -291,7 +291,7 @@ select {
   align-self: center;
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
 }
 
@@ -311,7 +311,7 @@ select {
 .option-note,
 .placeholder-block p {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 
 .field {
@@ -322,7 +322,7 @@ select {
 }
 
 .field span:first-child {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.35;
 }
 
@@ -332,7 +332,7 @@ select {
   align-items: center;
   width: 100%;
   min-width: 0;
-  min-height: 3.15rem;
+  min-height: 2.95rem;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(46, 68, 50, 0.16);
   background: rgba(255, 255, 255, 0.88);
@@ -349,29 +349,31 @@ select:focus,
   flex: 1;
   width: 100%;
   min-width: 0;
-  padding: 0 0.95rem;
+  padding: 0 0.8rem;
   border: 0;
   outline: none;
   background: transparent;
   color: var(--ink);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
 }
 
 .prefix,
 .suffix {
   color: var(--muted);
-  padding-inline: 0.95rem;
+  padding-inline: 0.8rem;
+  white-space: nowrap;
 }
 
 select {
   width: 100%;
-  padding: 0 0.95rem;
+  padding: 0 0.8rem;
   outline: none;
+  font-size: 0.96rem;
 }
 
 .field-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .field-grid-double {
@@ -397,12 +399,12 @@ select {
 }
 
 .loan-card .field {
-  margin-top: 0.75rem;
+  margin-top: 0.65rem;
 }
 
 .loan-card .field-grid + .field-grid,
 .loan-card .field-grid + .rate-detail {
-  margin-top: 0.25rem;
+  margin-top: 0.15rem;
 }
 
 .detail-head h4 {
@@ -546,18 +548,18 @@ select {
 }
 
 .summary-card {
-  padding: 1rem;
+  padding: 0.95rem;
 }
 
 .summary-card strong {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: 1.25;
 }
 
 .summary-card p {
   margin: 0.45rem 0 0;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
 .option-grid {
@@ -566,7 +568,7 @@ select {
 }
 
 .option-card {
-  padding: 1rem;
+  padding: 0.95rem;
 }
 
 .option-card-head {
@@ -577,7 +579,7 @@ select {
 }
 
 .option-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.22rem;
   line-height: 1.35;
 }
 
@@ -589,7 +591,7 @@ select {
 }
 
 .option-metric {
-  padding: 0.85rem 0.95rem;
+  padding: 0.75rem 0.85rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.7);
@@ -609,7 +611,7 @@ select {
 }
 
 .table-header {
-  padding: 1rem 1rem 0.85rem;
+  padding: 0.95rem 0.95rem 0.8rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -714,11 +716,19 @@ tbody tr:nth-child(even) {
 
 @media (max-width: 1380px) {
   .layout {
-    grid-template-columns: minmax(28rem, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(31rem, 0.98fr) minmax(0, 1.02fr);
   }
 
   .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1240px) {
+  .field-grid,
+  .field-grid-double,
+  .option-metrics {
+    grid-template-columns: 1fr;
   }
 }
 
