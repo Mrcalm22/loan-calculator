@@ -53,291 +53,310 @@
               </div>
             </div>
 
-            <div class="loan-grid">
-              <article class="loan-card">
-                <div class="loan-card-head">
-                  <h3>公积金贷款</h3>
+            <div class="accordion-stack">
+              <details class="form-accordion" open>
+                <summary>
+                  <div class="accordion-title-group">
+                    <p class="section-kicker">贷款参数</p>
+                    <h3>公积金贷款</h3>
+                  </div>
                   <span class="badge badge-provident">通常利率更低</span>
-                </div>
+                </summary>
+                <div class="accordion-body">
+                  <article class="loan-card">
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>剩余本金</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="provident-balance" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
 
-                <div class="field-grid">
-                  <label class="field">
-                    <span>剩余本金</span>
-                    <div class="input-wrap">
-                      <span class="prefix">¥</span>
-                      <input id="provident-balance" inputmode="decimal" autocomplete="off" />
+                      <label class="field">
+                        <span>剩余月数</span>
+                        <div class="input-wrap">
+                          <input id="provident-months" inputmode="numeric" autocomplete="off" />
+                          <span class="suffix">月</span>
+                        </div>
+                      </label>
                     </div>
-                  </label>
 
-                  <label class="field">
-                    <span>剩余月数</span>
-                    <div class="input-wrap">
-                      <input id="provident-months" inputmode="numeric" autocomplete="off" />
-                      <span class="suffix">月</span>
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>还款方式</span>
+                        <select id="provident-method">
+                          <option value="annuity">等额本息</option>
+                          <option value="equal-principal">等额本金</option>
+                        </select>
+                      </label>
+
+                      <label class="field">
+                        <span>利率模式</span>
+                        <select id="provident-rate-mode">
+                          <option value="fixed">直接输入执行利率</option>
+                          <option value="lpr">LPR 加减点</option>
+                        </select>
+                      </label>
                     </div>
-                  </label>
-                </div>
 
-                <div class="field-grid">
-                  <label class="field">
-                    <span>还款方式</span>
-                    <select id="provident-method">
-                      <option value="annuity">等额本息</option>
-                      <option value="equal-principal">等额本金</option>
-                    </select>
-                  </label>
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>当前执行年利率</span>
+                        <div class="input-wrap">
+                          <input id="provident-current-rate" inputmode="decimal" autocomplete="off" />
+                          <span class="suffix">%</span>
+                        </div>
+                      </label>
 
-                  <label class="field">
-                    <span>利率模式</span>
-                    <select id="provident-rate-mode">
-                      <option value="fixed">直接输入执行利率</option>
-                      <option value="lpr">LPR 加减点</option>
-                    </select>
-                  </label>
-                </div>
-
-                <div class="field-grid">
-                  <label class="field">
-                    <span>当前执行年利率</span>
-                    <div class="input-wrap">
-                      <input id="provident-current-rate" inputmode="decimal" autocomplete="off" />
-                      <span class="suffix">%</span>
+                      <label class="field">
+                        <span>当前月供（可选）</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="provident-current-payment" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
                     </div>
-                  </label>
 
-                  <label class="field">
-                    <span>当前月供（可选）</span>
-                    <div class="input-wrap">
-                      <span class="prefix">¥</span>
-                      <input id="provident-current-payment" inputmode="decimal" autocomplete="off" />
+                    <div class="rate-detail" id="provident-lpr-fields" hidden>
+                      <div class="detail-head">
+                        <h4>LPR 重定价设定</h4>
+                        <p>到下次重定价前按当前执行利率测算，之后按你填写的 LPR 假设继续。</p>
+                      </div>
+
+                      <div class="field-grid">
+                        <label class="field">
+                          <span>当前 5 年期以上 LPR</span>
+                          <div class="input-wrap">
+                            <input id="provident-current-lpr" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">%</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>加减基点</span>
+                          <div class="input-wrap">
+                            <input id="provident-spread-bps" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">bp</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>距下次重定价剩余月数</span>
+                          <div class="input-wrap">
+                            <input id="provident-months-to-reset" inputmode="numeric" autocomplete="off" />
+                            <span class="suffix">月</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>下次及之后 LPR 假设</span>
+                          <div class="input-wrap">
+                            <input id="provident-future-lpr" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">%</span>
+                          </div>
+                        </label>
+                      </div>
                     </div>
-                  </label>
+                  </article>
                 </div>
+              </details>
 
-                <div class="rate-detail" id="provident-lpr-fields" hidden>
-                  <div class="detail-head">
-                    <h4>LPR 重定价设定</h4>
-                    <p>到下次重定价前按当前执行利率测算，之后按你填写的 LPR 假设继续。</p>
+              <details class="form-accordion" open>
+                <summary>
+                  <div class="accordion-title-group">
+                    <p class="section-kicker">贷款参数</p>
+                    <h3>商业贷款</h3>
                   </div>
-
-                  <div class="field-grid">
-                    <label class="field">
-                      <span>当前 5 年期以上 LPR</span>
-                      <div class="input-wrap">
-                        <input id="provident-current-lpr" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">%</span>
-                      </div>
-                    </label>
-
-                    <label class="field">
-                      <span>加减基点</span>
-                      <div class="input-wrap">
-                        <input id="provident-spread-bps" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">bp</span>
-                      </div>
-                    </label>
-
-                    <label class="field">
-                      <span>距下次重定价剩余月数</span>
-                      <div class="input-wrap">
-                        <input id="provident-months-to-reset" inputmode="numeric" autocomplete="off" />
-                        <span class="suffix">月</span>
-                      </div>
-                    </label>
-
-                    <label class="field">
-                      <span>下次及之后 LPR 假设</span>
-                      <div class="input-wrap">
-                        <input id="provident-future-lpr" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">%</span>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-              </article>
-
-              <article class="loan-card loan-card-accent">
-                <div class="loan-card-head">
-                  <h3>商业贷款</h3>
                   <span class="badge badge-commercial">优先支持 LPR 口径</span>
-                </div>
+                </summary>
+                <div class="accordion-body">
+                  <article class="loan-card loan-card-accent">
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>剩余本金</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="commercial-balance" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
 
-                <div class="field-grid">
-                  <label class="field">
-                    <span>剩余本金</span>
-                    <div class="input-wrap">
-                      <span class="prefix">¥</span>
-                      <input id="commercial-balance" inputmode="decimal" autocomplete="off" />
+                      <label class="field">
+                        <span>剩余月数</span>
+                        <div class="input-wrap">
+                          <input id="commercial-months" inputmode="numeric" autocomplete="off" />
+                          <span class="suffix">月</span>
+                        </div>
+                      </label>
                     </div>
-                  </label>
 
-                  <label class="field">
-                    <span>剩余月数</span>
-                    <div class="input-wrap">
-                      <input id="commercial-months" inputmode="numeric" autocomplete="off" />
-                      <span class="suffix">月</span>
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>还款方式</span>
+                        <select id="commercial-method">
+                          <option value="annuity">等额本息</option>
+                          <option value="equal-principal">等额本金</option>
+                        </select>
+                      </label>
+
+                      <label class="field">
+                        <span>利率模式</span>
+                        <select id="commercial-rate-mode">
+                          <option value="fixed">直接输入执行利率</option>
+                          <option value="lpr">LPR 加减点</option>
+                        </select>
+                      </label>
                     </div>
-                  </label>
-                </div>
 
-                <div class="field-grid">
-                  <label class="field">
-                    <span>还款方式</span>
-                    <select id="commercial-method">
-                      <option value="annuity">等额本息</option>
-                      <option value="equal-principal">等额本金</option>
-                    </select>
-                  </label>
+                    <div class="field-grid">
+                      <label class="field">
+                        <span>当前执行年利率</span>
+                        <div class="input-wrap">
+                          <input id="commercial-current-rate" inputmode="decimal" autocomplete="off" />
+                          <span class="suffix">%</span>
+                        </div>
+                      </label>
 
-                  <label class="field">
-                    <span>利率模式</span>
-                    <select id="commercial-rate-mode">
-                      <option value="fixed">直接输入执行利率</option>
-                      <option value="lpr">LPR 加减点</option>
-                    </select>
-                  </label>
-                </div>
-
-                <div class="field-grid">
-                  <label class="field">
-                    <span>当前执行年利率</span>
-                    <div class="input-wrap">
-                      <input id="commercial-current-rate" inputmode="decimal" autocomplete="off" />
-                      <span class="suffix">%</span>
+                      <label class="field">
+                        <span>当前月供（可选）</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="commercial-current-payment" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
                     </div>
-                  </label>
 
-                  <label class="field">
-                    <span>当前月供（可选）</span>
-                    <div class="input-wrap">
-                      <span class="prefix">¥</span>
-                      <input id="commercial-current-payment" inputmode="decimal" autocomplete="off" />
+                    <div class="rate-detail" id="commercial-lpr-fields" hidden>
+                      <div class="detail-head">
+                        <h4>LPR 重定价设定</h4>
+                        <p>适合像“LPR-30bp、每年重定价一次”这类账单。</p>
+                      </div>
+
+                      <div class="field-grid">
+                        <label class="field">
+                          <span>当前 5 年期以上 LPR</span>
+                          <div class="input-wrap">
+                            <input id="commercial-current-lpr" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">%</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>加减基点</span>
+                          <div class="input-wrap">
+                            <input id="commercial-spread-bps" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">bp</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>距下次重定价剩余月数</span>
+                          <div class="input-wrap">
+                            <input id="commercial-months-to-reset" inputmode="numeric" autocomplete="off" />
+                            <span class="suffix">月</span>
+                          </div>
+                        </label>
+
+                        <label class="field">
+                          <span>下次及之后 LPR 假设</span>
+                          <div class="input-wrap">
+                            <input id="commercial-future-lpr" inputmode="decimal" autocomplete="off" />
+                            <span class="suffix">%</span>
+                          </div>
+                        </label>
+                      </div>
                     </div>
-                  </label>
+                  </article>
                 </div>
+              </details>
 
-                <div class="rate-detail" id="commercial-lpr-fields" hidden>
-                  <div class="detail-head">
-                    <h4>LPR 重定价设定</h4>
-                    <p>适合像“LPR-30bp、每年重定价一次”这类账单。</p>
+              <details class="form-accordion" open>
+                <summary>
+                  <div class="accordion-title-group">
+                    <p class="section-kicker">提前还款</p>
+                    <h3>金额与分配策略</h3>
                   </div>
+                  <span class="accordion-note">自动分配到公积金和商贷</span>
+                </summary>
+                <div class="accordion-body">
+                  <div class="form-section form-section-inline">
+                    <div class="field-grid">
+                      <label class="field field-wide">
+                        <span>计划提前还款总额</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="prepayment-total" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
 
-                  <div class="field-grid">
-                    <label class="field">
-                      <span>当前 5 年期以上 LPR</span>
-                      <div class="input-wrap">
-                        <input id="commercial-current-lpr" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">%</span>
+                      <label class="field">
+                        <span>分配方式</span>
+                        <select id="allocation-strategy">
+                          <option value="higher-rate-first">优先冲高利率贷款</option>
+                          <option value="commercial-first">优先冲商贷</option>
+                          <option value="provident-first">优先冲公积金</option>
+                          <option value="proportional">按剩余本金占比分配</option>
+                          <option value="custom">自定义分配</option>
+                        </select>
+                      </label>
+
+                      <label class="field" id="custom-provident-field" hidden>
+                        <span>自定义公积金冲还额</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="custom-provident" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
+                    </div>
+
+                    <div class="allocation-preview" id="allocation-preview">
+                      <div class="allocation-card">
+                        <span>公积金预计冲还</span>
+                        <strong id="allocation-provident">¥0</strong>
                       </div>
-                    </label>
-
-                    <label class="field">
-                      <span>加减基点</span>
-                      <div class="input-wrap">
-                        <input id="commercial-spread-bps" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">bp</span>
+                      <div class="allocation-card">
+                        <span>商贷预计冲还</span>
+                        <strong id="allocation-commercial">¥0</strong>
                       </div>
-                    </label>
-
-                    <label class="field">
-                      <span>距下次重定价剩余月数</span>
-                      <div class="input-wrap">
-                        <input id="commercial-months-to-reset" inputmode="numeric" autocomplete="off" />
-                        <span class="suffix">月</span>
+                      <div class="allocation-card allocation-card-strong">
+                        <span>本次实际提前还款</span>
+                        <strong id="allocation-total">¥0</strong>
                       </div>
-                    </label>
-
-                    <label class="field">
-                      <span>下次及之后 LPR 假设</span>
-                      <div class="input-wrap">
-                        <input id="commercial-future-lpr" inputmode="decimal" autocomplete="off" />
-                        <span class="suffix">%</span>
-                      </div>
-                    </label>
+                    </div>
                   </div>
                 </div>
-              </article>
-            </div>
+              </details>
 
-            <div class="form-section">
-              <div class="section-title-row">
-                <div>
-                  <p class="section-kicker">提前还款</p>
-                  <h3>一次性拿出多少钱，优先冲哪一段</h3>
-                </div>
-                <span class="inline-tip">工具会按你设定的优先级自动分配到公积金和商贷</span>
-              </div>
-
-              <div class="field-grid">
-                <label class="field field-wide">
-                  <span>计划提前还款总额</span>
-                  <div class="input-wrap">
-                    <span class="prefix">¥</span>
-                    <input id="prepayment-total" inputmode="decimal" autocomplete="off" />
+              <details class="form-accordion">
+                <summary>
+                  <div class="accordion-title-group">
+                    <p class="section-kicker">机会成本</p>
+                    <h3>投资收益对比</h3>
                   </div>
-                </label>
+                  <span class="accordion-note">用于判断值不值</span>
+                </summary>
+                <div class="accordion-body">
+                  <div class="form-section form-section-inline">
+                    <div class="field-grid field-grid-double">
+                      <label class="field">
+                        <span>可替代年化收益率</span>
+                        <div class="input-wrap">
+                          <input id="benchmark-return" inputmode="decimal" autocomplete="off" />
+                          <span class="suffix">%</span>
+                        </div>
+                      </label>
 
-                <label class="field">
-                  <span>分配方式</span>
-                  <select id="allocation-strategy">
-                    <option value="higher-rate-first">优先冲高利率贷款</option>
-                    <option value="commercial-first">优先冲商贷</option>
-                    <option value="provident-first">优先冲公积金</option>
-                    <option value="proportional">按剩余本金占比分配</option>
-                    <option value="custom">自定义分配</option>
-                  </select>
-                </label>
-
-                <label class="field" id="custom-provident-field" hidden>
-                  <span>自定义公积金冲还额</span>
-                  <div class="input-wrap">
-                    <span class="prefix">¥</span>
-                    <input id="custom-provident" inputmode="decimal" autocomplete="off" />
+                      <label class="field">
+                        <span>提前还款违约金 / 手续费</span>
+                        <div class="input-wrap">
+                          <span class="prefix">¥</span>
+                          <input id="penalty-fee" inputmode="decimal" autocomplete="off" />
+                        </div>
+                      </label>
+                    </div>
                   </div>
-                </label>
-              </div>
-
-              <div class="allocation-preview" id="allocation-preview">
-                <div class="allocation-card">
-                  <span>公积金预计冲还</span>
-                  <strong id="allocation-provident">¥0</strong>
                 </div>
-                <div class="allocation-card">
-                  <span>商贷预计冲还</span>
-                  <strong id="allocation-commercial">¥0</strong>
-                </div>
-                <div class="allocation-card allocation-card-strong">
-                  <span>本次实际提前还款</span>
-                  <strong id="allocation-total">¥0</strong>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="section-title-row">
-                <div>
-                  <p class="section-kicker">机会成本</p>
-                  <h3>把提前还款拿去投资，会不会更划算</h3>
-                </div>
-              </div>
-
-              <div class="field-grid field-grid-double">
-                <label class="field">
-                  <span>可替代年化收益率</span>
-                  <div class="input-wrap">
-                    <input id="benchmark-return" inputmode="decimal" autocomplete="off" />
-                    <span class="suffix">%</span>
-                  </div>
-                </label>
-
-                <label class="field">
-                  <span>提前还款违约金 / 手续费</span>
-                  <div class="input-wrap">
-                    <span class="prefix">¥</span>
-                    <input id="penalty-fee" inputmode="decimal" autocomplete="off" />
-                  </div>
-                </label>
-              </div>
+              </details>
             </div>
 
             <div class="form-actions">

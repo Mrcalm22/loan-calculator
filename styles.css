@@ -251,8 +251,54 @@ select {
   gap: 1rem;
 }
 
-.loan-grid {
-  grid-template-columns: 1fr;
+.accordion-stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.form-accordion {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 250, 242, 0.78);
+  overflow: hidden;
+}
+
+.form-accordion[open] {
+  background: rgba(255, 251, 244, 0.9);
+}
+
+.form-accordion summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 1rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.form-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-title-group {
+  min-width: 0;
+}
+
+.accordion-title-group h3 {
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.35;
+}
+
+.accordion-note {
+  color: var(--muted);
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.accordion-body {
+  padding: 0 1rem 1rem;
 }
 
 .loan-card,
@@ -265,6 +311,7 @@ select {
 .loan-card {
   padding: 1.1rem;
   min-width: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .loan-card-accent {
@@ -388,6 +435,12 @@ select {
   margin-top: 1.2rem;
   padding-top: 1.2rem;
   border-top: 1px solid var(--line);
+}
+
+.form-section-inline {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .rate-detail {
@@ -729,6 +782,16 @@ tbody tr:nth-child(even) {
   .field-grid-double,
   .option-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .form-accordion summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .accordion-note,
+  .badge {
+    white-space: normal;
   }
 }
 
