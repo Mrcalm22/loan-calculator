@@ -1,0 +1,64 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="116" y1="54" x2="1057" y2="553" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EA"/>
+      <stop offset="1" stop-color="#F2E6D4"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="516" y2="332" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF6" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#F7F0E2" stop-opacity="0.94"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="350" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F6B53"/>
+      <stop offset="1" stop-color="#2B7A61"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#29362B" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="32" fill="url(#bg)"/>
+  <circle cx="1012" cy="98" r="132" fill="#1F6B53" fill-opacity="0.10"/>
+  <circle cx="114" cy="540" r="180" fill="#B76B2B" fill-opacity="0.08"/>
+  <circle cx="1037" cy="550" r="136" fill="#1F6B53" fill-opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="64" y="74" width="504" height="482" rx="28" fill="url(#card)"/>
+    <rect x="608" y="74" width="528" height="482" rx="28" fill="url(#card)"/>
+  </g>
+
+  <text x="100" y="132" fill="#1F6B53" font-size="18" font-family="Microsoft YaHei, sans-serif" letter-spacing="4">LOAN CALCULATOR</text>
+  <text x="100" y="208" fill="#1F2A1F" font-size="54" font-weight="700" font-family="Microsoft YaHei, sans-serif">组合贷提前还款计算器</text>
+  <text x="100" y="272" fill="#5F6C62" font-size="24" font-family="Microsoft YaHei, sans-serif">支持公积金、商贷、LPR 重定价、当前月供校准</text>
+  <text x="100" y="314" fill="#5F6C62" font-size="24" font-family="Microsoft YaHei, sans-serif">一眼比较缩短年限、减少月供和资金机会成本</text>
+
+  <rect x="100" y="356" width="172" height="54" rx="27" fill="url(#accent)"/>
+  <text x="136" y="392" fill="#FFFDF8" font-size="23" font-weight="700" font-family="Microsoft YaHei, sans-serif">LPR 场景友好</text>
+
+  <rect x="288" y="356" width="188" height="54" rx="27" fill="#FFFFFF" fill-opacity="0.72" stroke="#D7D0C3"/>
+  <text x="322" y="392" fill="#1F2A1F" font-size="23" font-weight="700" font-family="Microsoft YaHei, sans-serif">账单月供校准</text>
+
+  <rect x="100" y="452" width="432" height="72" rx="22" fill="#FFFDF8" fill-opacity="0.88" stroke="#DDD4C4"/>
+  <text x="128" y="492" fill="#5F6C62" font-size="20" font-family="Microsoft YaHei, sans-serif">适合中国房贷用户做更贴近真实账单的提前还款判断</text>
+
+  <rect x="650" y="116" width="444" height="92" rx="22" fill="#FFFFFF" fill-opacity="0.80" stroke="#DED5C7"/>
+  <text x="682" y="150" fill="#5F6C62" font-size="17" font-family="Microsoft YaHei, sans-serif">当前剩余本金</text>
+  <text x="682" y="188" fill="#1F2A1F" font-size="34" font-weight="700" font-family="Microsoft YaHei, sans-serif">¥2,306,640</text>
+  <text x="924" y="150" fill="#5F6C62" font-size="17" font-family="Microsoft YaHei, sans-serif">当前首月月供</text>
+  <text x="924" y="188" fill="#1F2A1F" font-size="34" font-weight="700" font-family="Microsoft YaHei, sans-serif">¥14,961</text>
+
+  <rect x="650" y="232" width="444" height="138" rx="24" fill="#F7FBF9" stroke="#D9E7E1"/>
+  <text x="682" y="272" fill="#1F6B53" font-size="16" font-weight="700" font-family="Microsoft YaHei, sans-serif">更建议方案</text>
+  <text x="682" y="320" fill="#1F2A1F" font-size="40" font-weight="700" font-family="Microsoft YaHei, sans-serif">缩短年限</text>
+  <text x="682" y="352" fill="#5F6C62" font-size="20" font-family="Microsoft YaHei, sans-serif">按 3.00% 机会收益率假设</text>
+
+  <rect x="650" y="396" width="208" height="122" rx="22" fill="#FFFFFF" fill-opacity="0.82" stroke="#DDD4C4"/>
+  <text x="678" y="432" fill="#5F6C62" font-size="17" font-family="Microsoft YaHei, sans-serif">预估节省利息</text>
+  <text x="678" y="484" fill="#1F2A1F" font-size="34" font-weight="700" font-family="Microsoft YaHei, sans-serif">¥167,921</text>
+
+  <rect x="886" y="396" width="208" height="122" rx="22" fill="#FFFFFF" fill-opacity="0.82" stroke="#DDD4C4"/>
+  <text x="914" y="432" fill="#5F6C62" font-size="17" font-family="Microsoft YaHei, sans-serif">隐含年化回报</text>
+  <text x="914" y="484" fill="#1F2A1F" font-size="34" font-weight="700" font-family="Microsoft YaHei, sans-serif">3.25%</text>
+
+  <rect x="618" y="536" width="516" height="1" fill="#D9D0C1"/>
+</svg>

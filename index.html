@@ -9,19 +9,51 @@
       content="支持公积金、商贷、组合贷、LPR 重定价和提前还款收益比较的静态贷款计算器。"
     />
     <meta name="theme-color" content="#f4efe6" />
+    <meta property="og:title" content="组合贷提前还款计算器" />
+    <meta
+      property="og:description"
+      content="支持公积金、商贷、组合贷、LPR 重定价和提前还款收益比较。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/social-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="组合贷提前还款计算器" />
+    <meta
+      name="twitter:description"
+      content="支持公积金、商贷、组合贷、LPR 重定价和提前还款收益比较。"
+    />
+    <meta name="twitter:image" content="./assets/social-preview.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="background-orb orb-a"></div>
     <div class="background-orb orb-b"></div>
     <div class="page-shell">
+      <nav class="topbar">
+        <div class="brand-block">
+          <span class="brand-mark">LPR</span>
+          <div class="brand-copy">
+            <strong>组合贷提前还款计算器</strong>
+            <span>Mortgage Prepayment Planner</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <a class="topbar-link" href="https://github.com/Mrcalm22/loan-calculator" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="topbar-link" href="#results">看结果</a>
+        </div>
+      </nav>
+
       <header class="hero">
         <div class="hero-copy">
           <p class="eyebrow">组合贷提前还款计算器</p>
-          <h1>支持 LPR 重定价，也支持直接按账单月供校准</h1>
+          <h1>把 LPR、账单月供、提前还款和机会成本放进同一套判断里</h1>
           <p class="subtitle">
-            公积金、商贷可以分别设置利率模式。等额本息场景下，填入当前月供后，工具会优先按你的账单口径还原后续现金流。
+            面向真实中国房贷场景设计。支持公积金、商贷、组合贷，支持 LPR 重定价，也支持按当前账单月供校准，让“提前还值不值”不再靠猜。
           </p>
+          <div class="hero-actions">
+            <a class="primary-button hero-button" href="#calculator-form">立即测算</a>
+            <a class="secondary-button hero-button" href="https://github.com/Mrcalm22/loan-calculator" target="_blank" rel="noreferrer">查看源码</a>
+          </div>
         </div>
         <div class="hero-notes">
           <div class="hero-pill">
@@ -39,6 +71,24 @@
         </div>
       </header>
 
+      <section class="feature-strip">
+        <article class="feature-chip">
+          <span>1</span>
+          <strong>先还哪段贷款</strong>
+          <p>支持优先商贷、优先高利率、按比例和自定义分配。</p>
+        </article>
+        <article class="feature-chip">
+          <span>2</span>
+          <strong>按真实账单校准</strong>
+          <p>等额本息可直接录入当前月供，贴近银行端口径。</p>
+        </article>
+        <article class="feature-chip">
+          <span>3</span>
+          <strong>直接给结论</strong>
+          <p>同时比较节省利息、结清时间和机会收益率。</p>
+        </article>
+      </section>
+
       <main class="layout">
         <section class="panel form-panel">
           <form id="calculator-form" novalidate>
@@ -46,6 +96,7 @@
               <div>
                 <p class="section-kicker">输入参数</p>
                 <h2>贷款信息与提前还款方案</h2>
+                <p class="panel-lead">按你的贷款账单逐段录入，工具会自动重建剩余现金流。</p>
               </div>
               <div class="toolbar">
                 <button type="button" class="ghost-button" id="example-button">载入 LPR 示例</button>
@@ -369,11 +420,12 @@
           </form>
         </section>
 
-        <section class="panel results-panel">
+        <section class="panel results-panel" id="results">
           <div class="panel-heading panel-heading-results">
             <div>
               <p class="section-kicker">测算结果</p>
               <h2>哪个方案更划算</h2>
+              <p class="panel-lead">结果区会优先给结论，再展开原计划、方案对比和月度明细。</p>
             </div>
           </div>
 

@@ -17,6 +17,10 @@
 
 - GitHub Pages: `https://mrcalm22.github.io/loan-calculator/`
 
+## 项目预览
+
+![组合贷提前还款计算器预览](./assets/social-preview.png)
+
 ## 本地运行
 
 直接用浏览器打开 `index.html` 即可。
@@ -59,6 +63,7 @@ loan-calculator/
 - 商贷采用 `LPR 重定价`
 - 想用当前账单月供反推更接近真实的剩余现金流
 - 想对比“省下的利息”和“资金机会成本”
+- 想部署一个可直接分享的静态房贷工具页
 
 ## 使用提醒
 
