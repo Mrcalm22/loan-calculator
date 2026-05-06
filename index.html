@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组合贷提前还款计算器</title>
+    <meta
+      name="description"
+      content="支持公积金、商贷、组合贷、LPR 重定价和提前还款收益比较的静态贷款计算器。"
+    />
+    <meta name="theme-color" content="#f4efe6" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-orb orb-a"></div>
+    <div class="background-orb orb-b"></div>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">组合贷提前还款计算器</p>
+          <h1>支持 LPR 重定价，也支持直接按账单月供校准</h1>
+          <p class="subtitle">
+            公积金、商贷可以分别设置利率模式。等额本息场景下，填入当前月供后，工具会优先按你的账单口径还原后续现金流。
+          </p>
+        </div>
+        <div class="hero-notes">
+          <div class="hero-pill">
+            <span>利率模式</span>
+            <strong>执行利率 / LPR 加减点</strong>
+          </div>
+          <div class="hero-pill">
+            <span>月供校准</span>
+            <strong>支持当前账单月供</strong>
+          </div>
+          <div class="hero-pill">
+            <span>结果比较</span>
+            <strong>缩短年限 / 减少月供</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel form-panel">
+          <form id="calculator-form" novalidate>
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">输入参数</p>
+                <h2>贷款信息与提前还款方案</h2>
+              </div>
+              <div class="toolbar">
+                <button type="button" class="ghost-button" id="example-button">载入 LPR 示例</button>
+                <button type="button" class="ghost-button" id="reset-button">重置</button>
+              </div>
+            </div>
+
+            <div class="loan-grid">
+              <article class="loan-card">
+                <div class="loan-card-head">
+                  <h3>公积金贷款</h3>
+                  <span class="badge badge-provident">通常利率更低</span>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>剩余本金</span>
+                    <div class="input-wrap">
+                      <span class="prefix">¥</span>
+                      <input id="provident-balance" inputmode="decimal" autocomplete="off" />
+                    </div>
+                  </label>
+
+                  <label class="field">
+                    <span>剩余月数</span>
+                    <div class="input-wrap">
+                      <input id="provident-months" inputmode="numeric" autocomplete="off" />
+                      <span class="suffix">月</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>还款方式</span>
+                    <select id="provident-method">
+                      <option value="annuity">等额本息</option>
+                      <option value="equal-principal">等额本金</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span>利率模式</span>
+                    <select id="provident-rate-mode">
+                      <option value="fixed">直接输入执行利率</option>
+                      <option value="lpr">LPR 加减点</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>当前执行年利率</span>
+                    <div class="input-wrap">
+                      <input id="provident-current-rate" inputmode="decimal" autocomplete="off" />
+                      <span class="suffix">%</span>
+                    </div>
+                  </label>
+
+                  <label class="field">
+                    <span>当前月供（可选）</span>
+                    <div class="input-wrap">
+                      <span class="prefix">¥</span>
+                      <input id="provident-current-payment" inputmode="decimal" autocomplete="off" />
+                    </div>
+                  </label>
+                </div>
+
+                <div class="rate-detail" id="provident-lpr-fields" hidden>
+                  <div class="detail-head">
+                    <h4>LPR 重定价设定</h4>
+                    <p>到下次重定价前按当前执行利率测算，之后按你填写的 LPR 假设继续。</p>
+                  </div>
+
+                  <div class="field-grid">
+                    <label class="field">
+                      <span>当前 5 年期以上 LPR</span>
+                      <div class="input-wrap">
+                        <input id="provident-current-lpr" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">%</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>加减基点</span>
+                      <div class="input-wrap">
+                        <input id="provident-spread-bps" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">bp</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>距下次重定价剩余月数</span>
+                      <div class="input-wrap">
+                        <input id="provident-months-to-reset" inputmode="numeric" autocomplete="off" />
+                        <span class="suffix">月</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>下次及之后 LPR 假设</span>
+                      <div class="input-wrap">
+                        <input id="provident-future-lpr" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">%</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </article>
+
+              <article class="loan-card loan-card-accent">
+                <div class="loan-card-head">
+                  <h3>商业贷款</h3>
+                  <span class="badge badge-commercial">优先支持 LPR 口径</span>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>剩余本金</span>
+                    <div class="input-wrap">
+                      <span class="prefix">¥</span>
+                      <input id="commercial-balance" inputmode="decimal" autocomplete="off" />
+                    </div>
+                  </label>
+
+                  <label class="field">
+                    <span>剩余月数</span>
+                    <div class="input-wrap">
+                      <input id="commercial-months" inputmode="numeric" autocomplete="off" />
+                      <span class="suffix">月</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>还款方式</span>
+                    <select id="commercial-method">
+                      <option value="annuity">等额本息</option>
+                      <option value="equal-principal">等额本金</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span>利率模式</span>
+                    <select id="commercial-rate-mode">
+                      <option value="fixed">直接输入执行利率</option>
+                      <option value="lpr">LPR 加减点</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="field-grid">
+                  <label class="field">
+                    <span>当前执行年利率</span>
+                    <div class="input-wrap">
+                      <input id="commercial-current-rate" inputmode="decimal" autocomplete="off" />
+                      <span class="suffix">%</span>
+                    </div>
+                  </label>
+
+                  <label class="field">
+                    <span>当前月供（可选）</span>
+                    <div class="input-wrap">
+                      <span class="prefix">¥</span>
+                      <input id="commercial-current-payment" inputmode="decimal" autocomplete="off" />
+                    </div>
+                  </label>
+                </div>
+
+                <div class="rate-detail" id="commercial-lpr-fields" hidden>
+                  <div class="detail-head">
+                    <h4>LPR 重定价设定</h4>
+                    <p>适合像“LPR-30bp、每年重定价一次”这类账单。</p>
+                  </div>
+
+                  <div class="field-grid">
+                    <label class="field">
+                      <span>当前 5 年期以上 LPR</span>
+                      <div class="input-wrap">
+                        <input id="commercial-current-lpr" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">%</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>加减基点</span>
+                      <div class="input-wrap">
+                        <input id="commercial-spread-bps" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">bp</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>距下次重定价剩余月数</span>
+                      <div class="input-wrap">
+                        <input id="commercial-months-to-reset" inputmode="numeric" autocomplete="off" />
+                        <span class="suffix">月</span>
+                      </div>
+                    </label>
+
+                    <label class="field">
+                      <span>下次及之后 LPR 假设</span>
+                      <div class="input-wrap">
+                        <input id="commercial-future-lpr" inputmode="decimal" autocomplete="off" />
+                        <span class="suffix">%</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="form-section">
+              <div class="section-title-row">
+                <div>
+                  <p class="section-kicker">提前还款</p>
+                  <h3>一次性拿出多少钱，优先冲哪一段</h3>
+                </div>
+                <span class="inline-tip">工具会按你设定的优先级自动分配到公积金和商贷</span>
+              </div>
+
+              <div class="field-grid">
+                <label class="field field-wide">
+                  <span>计划提前还款总额</span>
+                  <div class="input-wrap">
+                    <span class="prefix">¥</span>
+                    <input id="prepayment-total" inputmode="decimal" autocomplete="off" />
+                  </div>
+                </label>
+
+                <label class="field">
+                  <span>分配方式</span>
+                  <select id="allocation-strategy">
+                    <option value="higher-rate-first">优先冲高利率贷款</option>
+                    <option value="commercial-first">优先冲商贷</option>
+                    <option value="provident-first">优先冲公积金</option>
+                    <option value="proportional">按剩余本金占比分配</option>
+                    <option value="custom">自定义分配</option>
+                  </select>
+                </label>
+
+                <label class="field" id="custom-provident-field" hidden>
+                  <span>自定义公积金冲还额</span>
+                  <div class="input-wrap">
+                    <span class="prefix">¥</span>
+                    <input id="custom-provident" inputmode="decimal" autocomplete="off" />
+                  </div>
+                </label>
+              </div>
+
+              <div class="allocation-preview" id="allocation-preview">
+                <div class="allocation-card">
+                  <span>公积金预计冲还</span>
+                  <strong id="allocation-provident">¥0</strong>
+                </div>
+                <div class="allocation-card">
+                  <span>商贷预计冲还</span>
+                  <strong id="allocation-commercial">¥0</strong>
+                </div>
+                <div class="allocation-card allocation-card-strong">
+                  <span>本次实际提前还款</span>
+                  <strong id="allocation-total">¥0</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="section-title-row">
+                <div>
+                  <p class="section-kicker">机会成本</p>
+                  <h3>把提前还款拿去投资，会不会更划算</h3>
+                </div>
+              </div>
+
+              <div class="field-grid field-grid-double">
+                <label class="field">
+                  <span>可替代年化收益率</span>
+                  <div class="input-wrap">
+                    <input id="benchmark-return" inputmode="decimal" autocomplete="off" />
+                    <span class="suffix">%</span>
+                  </div>
+                </label>
+
+                <label class="field">
+                  <span>提前还款违约金 / 手续费</span>
+                  <div class="input-wrap">
+                    <span class="prefix">¥</span>
+                    <input id="penalty-fee" inputmode="decimal" autocomplete="off" />
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="primary-button">重新测算</button>
+              <p class="caption">
+                LPR 模式默认假设：到下次重定价前沿用当前执行利率；从下次重定价开始，按你填写的 LPR 假设持续不变。
+              </p>
+            </div>
+            <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+          </form>
+        </section>
+
+        <section class="panel results-panel">
+          <div class="panel-heading panel-heading-results">
+            <div>
+              <p class="section-kicker">测算结果</p>
+              <h2>哪个方案更划算</h2>
+            </div>
+          </div>
+
+          <article class="verdict-card" id="verdict-card">
+            <div class="placeholder-block">
+              <span class="placeholder-tag">等待输入</span>
+              <h3>先录入贷款参数，再判断提前还款是否划算。</h3>
+              <p>这里会给出结论、解释原因，并指出“缩短年限”和“减少月供”哪个更优。</p>
+            </div>
+          </article>
+
+          <div class="assumption-banner" id="assumption-banner">
+            这里会展示本次测算采用的利率和月供假设。
+          </div>
+
+          <section class="summary-grid" id="summary-grid">
+            <article class="summary-card">
+              <span>当前剩余本金</span>
+              <strong>¥0</strong>
+              <p>公积金与商贷合计</p>
+            </article>
+            <article class="summary-card">
+              <span>原计划剩余总利息</span>
+              <strong>¥0</strong>
+              <p>按当前剩余期数估算</p>
+            </article>
+            <article class="summary-card">
+              <span>当前首月月供</span>
+              <strong>¥0</strong>
+              <p>组合贷当月合计</p>
+            </article>
+            <article class="summary-card">
+              <span>原计划结清时间</span>
+              <strong>未计算</strong>
+              <p>按浏览器当前日期推算</p>
+            </article>
+          </section>
+
+          <section class="option-grid">
+            <article class="option-card" id="shorten-card"></article>
+            <article class="option-card" id="reduce-card"></article>
+          </section>
+
+          <section class="table-panel">
+            <div class="table-header">
+              <div>
+                <p class="section-kicker">月度明细</p>
+                <h3>每月本金、利息和剩余本金</h3>
+                <p class="table-subtitle" id="table-subtitle">表格会展示你当前选中的方案。</p>
+              </div>
+              <div class="table-tabs" role="tablist" aria-label="还款方案">
+                <button type="button" class="tab-button is-active" data-scenario="baseline">原计划</button>
+                <button type="button" class="tab-button" data-scenario="shorten">缩短年限</button>
+                <button type="button" class="tab-button" data-scenario="reduce">减少月供</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>期数</th>
+                    <th>月供</th>
+                    <th>本金</th>
+                    <th>利息</th>
+                    <th>公积金余额</th>
+                    <th>商贷余额</th>
+                    <th>剩余总本金</th>
+                  </tr>
+                </thead>
+                <tbody id="schedule-body">
+                  <tr>
+                    <td colspan="7" class="empty-row">输入参数后，会在这里展开完整还款明细。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <details class="assumptions">
+            <summary>计算说明与边界假设</summary>
+            <div class="assumptions-content">
+              <p>1. 等额本息下，如果你填写了当前月供，工具会优先用它校准“从现在到下次重定价前”的现金流。</p>
+              <p>2. LPR 模式下，到下次重定价前按当前执行利率测算；从下次重定价开始，按“下次及之后 LPR 假设”保持不变。</p>
+              <p>3. “缩短年限”会先按当前月供推算新的剩余期数；若后续遇到 LPR 重定价，则按新的结清时间重算月供。</p>
+              <p>4. “减少月供”假设提前还款后立即按当前利率重算月供，并在后续重定价时继续按剩余期数重算。</p>
+              <p>5. 银行端真实结果仍会受计息起点、扣款日、整万元规则和提前还款办理日影响，最终以银行系统回显为准。</p>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
